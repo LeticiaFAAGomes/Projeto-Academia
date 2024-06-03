@@ -7,7 +7,7 @@ function validarCamposObrigatorios(oNome, oContato, aIdade, aTaxa, oNivel, oObje
 }
 
 function calcularNivel(oNivel){
-    /*RN.02 - Validação de Nível:*/
+    //RN.02 - Validação de Nível:
     if ( oNivel > 0) {
         if (oNivel == 0) {
             return "Iniciante Absoluto";
@@ -22,7 +22,7 @@ function calcularNivel(oNivel){
 }
 
 function validarNomeCompleto(oNomeCompleto){
-    //RN.03 - Validação de Nome
+    //RN.03 - Validação de Nome Completo do Aluno:
     if (oNomeCompleto.includes(" ")){
         parte = oNomeCompleto.split(" ");
         sobrenome = parte[1];
@@ -51,7 +51,7 @@ function validarNumeros(oContato, aIdade, aTaxa, oNivel) {
 }
 
 function mostrarDetalhes(aCondicao) {
-    //RN.05 - Validação de detalhes:
+    //RN.05 - Validação de Detalhes:
     restricao = document.getElementById("restricao");
     aCondicao == "sim" ? restricao.style.display = "inline" : restricao.style.display = "none"; 
 }
@@ -118,14 +118,13 @@ function registrarMatricula(nomeCompleto, contato, idade, taxa, planoMensalidade
 }
 
 function matricular() {
-    let restricao = document.getElementById("restricao");
     let nomeCompleto = document.getElementById("nome").value;
     let contato = document.getElementById("contato");
     let idade = document.getElementById("idade");
     let taxa = document.getElementById("taxa");
     let nivel = document.getElementById("nivel");
     let planoMensalidade = parseFloat(document.getElementById("planos").value);
-    //let restricao = document.getElementById("restricao");
+    let restricao = document.getElementById("restricao");
     let condicao = document.getElementById("condicao").value;
     let objetivo = document.getElementById("objetivo").value;
     let mensagem = registrarMatricula(nomeCompleto, contato, idade, taxa, planoMensalidade, nivel,  condicao, restricao, objetivo);
