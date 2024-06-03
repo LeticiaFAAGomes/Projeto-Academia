@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia Health Fitness</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+
+    <div class="conteudo">
+        <h1>Matrícula Health Fitness</h1>
+        <form>
+            <div class="row">
+                <input type="text" id="nome" class="nome" placeholder="Nome do Aluno:">
+                <input type="tel" id="contato" class="contato" placeholder="Número de Contato" maxlength="15" autocomplete="off">
+            </div>
+
+            <div class="row">
+                <input type="text" id="idade" class="idade" placeholder="Idade" maxlength="2" autocomplete="off">
+                <input type="text" id="taxa" class="taxa" placeholder="Taxa (R$)" maxlength="3" autocomplete="off">
+                <select name="planos" id="planos" class="planos">
+                    <optgroup label="Selecione Uma das Opções de Plano">
+                        <option value="120">Plano Flex</option>
+                        <option value="110">Plano Steady</option>
+                        <option value="100">Plano Power</option>
+                        <option value="115">Plano Premium</option>
+                    </optgroup>
+                </select>
+                <input type="text" id="nivel" class="nivel" placeholder="Meses já treinados" maxlength="3" autocomplete="off">
+                <select name="condicao" id="condicao" onchange="mostrarDetalhes(this.value, 'restricao')">
+                    <optgroup label="O Aluno Tem Alguma Condição Médica ou Restrições?">
+                        <option value="nao">Não</option>
+                        <option value="sim">Sim</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="detalhes">
+                    <textarea rows="4" cols="42" id="restricao" placeholder="Descreva a condição do aluno:" style="display: none;"></textarea>
+                    <textarea rows="4" cols="35" id="objetivo"  placeholder="Descreva o objetivo:"></textarea>
+                </div>  
+            </div>
+            <div class="row">
+                <button type="button" id="btn" onclick="matricular()">Registrar Matrícula</button>
+            </div>
+        </form>
+        <div class="historico">
+        <h3>Histórico</h3>
+        <ul id="historicoAlteracao">
+        </ul>
+    </div>
+    </div>
+    <script src="JS/academia.js"></script>
+</body>

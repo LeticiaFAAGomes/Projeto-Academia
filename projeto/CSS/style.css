@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Nunito sans", sans-serif;
+}
+
+.conteudo{
+    height: 100vh;
+    padding-top: 70px;
+    background-color: rgb(33, 35, 41);
+    color: white;
+}
+
+h1{
+    margin-bottom: 30px;
+    text-align: center;
+    color: white;
+}
+
+form {
+    display: block;
+    justify-content: space-around;
+    margin: 0 auto;
+}
+
+input, select, textarea{
+    padding: 10px;
+    border: none;
+    outline: none;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+button{
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgb(246, 51, 51);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.row{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.nome{
+    width: 400px;
+}
+
+.contato{
+    width: 200px;
+}
+
+.idade, .taxa{
+    width: 90px;
+}
+.historico{
+    text-align: center;
+}
