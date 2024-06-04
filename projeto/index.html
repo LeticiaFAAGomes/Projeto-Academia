@@ -12,13 +12,13 @@
         <h1>Matrícula Health Fitness</h1>
         <form>
             <div class="row">
-                <input type="text" id="nome" class="nome" placeholder="Nome do Aluno:">
-                <input type="tel" id="contato" class="contato" placeholder="Número de Contato" maxlength="15" autocomplete="off">
+                <input type="text" id="nome" class="nome" placeholder="Nome do Aluno:" autocomplete="off">
+                <input type="tel" id="contato" class="contato" placeholder="Número de Contato" maxlength="15" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
             </div>
 
             <div class="row">
-                <input type="text" id="idade" class="idade" placeholder="Idade" maxlength="2" autocomplete="off">
-                <input type="text" id="taxa" class="taxa" placeholder="Taxa (R$)" maxlength="3" autocomplete="off">
+                <input type="text" id="idade" class="idade" placeholder="Idade" maxlength="2" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)/g, '$1');">
+                <input type="text" id="taxa" class="taxa" placeholder="Taxa (R$)" maxlength="5" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 <select name="planos" id="planos" class="planos">
                     <optgroup label="Selecione Uma das Opções de Plano">
                         <option value="120">Plano Flex</option>
@@ -27,7 +27,7 @@
                         <option value="115">Plano Premium</option>
                     </optgroup>
                 </select>
-                <input type="text" id="nivel" class="nivel" placeholder="Meses já treinados" maxlength="3" autocomplete="off">
+                <input type="text" id="nivel" class="nivel" placeholder="Meses já treinados" maxlength="3" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)/g, '$1');">
                 <select name="condicao" id="condicao" onchange="mostrarDetalhes(this.value, 'restricao')">
                     <optgroup label="O Aluno Tem Alguma Condição Médica ou Restrições?">
                         <option value="nao">Não</option>

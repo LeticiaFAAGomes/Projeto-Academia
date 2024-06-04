@@ -1,9 +1,8 @@
 function validarCamposObrigatorios(oNome, oContato, aIdade, aTaxa, oNivel, oObjetivo, condicao, restricao){
     //RN.01 - Validação de Campos Obrigatórios:
-    const listaSem = [oNome, oContato, aIdade, aTaxa, oNivel, oObjetivo]
-    const listaCom = [oNome, oContato, aIdade, aTaxa, oNivel, oObjetivo, restricao]
-    const decisao = condicao == "sim"? listaCom.every(item => item !== "") : listaSem.every(item => item !== "");
-    return decisao;
+    const listaSem = [oNome, oContato, aIdade, aTaxa, oNivel, oObjetivo];
+    const listaCom = [oNome, oContato, aIdade, aTaxa, oNivel, oObjetivo, restricao];
+    return decisao = condicao == "sim"? listaCom.every(item => item !== "") : listaSem.every(item => item !== "");
 }
 
 function calcularNivel(oNivel){
@@ -11,11 +10,11 @@ function calcularNivel(oNivel){
     if ( oNivel > 0) {
         if (oNivel == 0) {
             return "Iniciante Absoluto";
-        } else if(oNivel > 0 && oNivel < 12) {
+        } else if(oNivel < 12) {
             return "Iniciante";
-        } else if (oNivel >= 12 && oNivel < 48) {
+        } else if (oNivel < 48) {
             return "intermediario";
-        } else if (oNivel >= 48) {
+        } else {
             return "Avançado";
         }
     }
@@ -26,28 +25,21 @@ function validarNomeCompleto(oNomeCompleto){
     if (oNomeCompleto.includes(" ")){
         parte = oNomeCompleto.split(" ");
         sobrenome = parte[1];
-        if(sobrenome.length > 3)
-        return sobrenome
-    }
+        if(sobrenome.length > 3){
+            return sobrenome;
+        } 
+    } 
 }
 
-function validarNumeros(oContato, aIdade, aTaxa, oNivel) {
+function validarNumeros(oContato) {
     //RN.04 - Validação de Números:
-    const array = [oContato, aIdade, aTaxa, oNivel];
-    array.forEach(item => {
-        item.addEventListener("input", () => {
-        let oNumero = parseFloat(item.value.replace(!isNaN, "")); 
-        if (Number.isNaN(oNumero)) {
-            oNumero = ""; 
-        }
-        item.value= oNumero;
-        const numero = oContato.value;
-        if (numero.length == 11) {
-            oContato.value = `(${numero.slice(0, 2)}) ${numero.slice(2, 7)}-${numero.slice(7)}`; // Formatação (XX) XXXXX-XXXX
-        }
-        });
+    oContato.addEventListener("input", () => {
+        if (oContato.value.length === 11) {
+            oContato.value = `(${oContato.value.slice(0, 2)}) ${oContato.value.slice(2, 7)}-${oContato.value.slice(7)}`;
+        } 
     });
-
+    
+    return oContato.value.length > 11 ? oContato.value : false;    
 }
 
 function mostrarDetalhes(aCondicao) {
@@ -58,11 +50,7 @@ function mostrarDetalhes(aCondicao) {
 
 function calcularValorTotal(oPlano, aTaxa){
     //RN.06 - Validação da Matrícula:
-    if(aTaxa > 0) {
-        let taxa = parseFloat(aTaxa);
-        let total = oPlano + taxa;
-        return total.toFixed(2);
-    }
+    return aTaxa > 0 ? (oPlano + aTaxa).toFixed(2) : false;
 }
 
 function calcularData(){
@@ -72,7 +60,7 @@ function calcularData(){
 
 function gerarNumeroMatricula(){
     //RN.08 - Geração de Número de Transação Único:
-    return Math.floor(Math.random() * 10000)
+    return Math.floor(Math.random() * 10000);
 }
 
 function registrarHistorico(aMensagem){
@@ -84,33 +72,33 @@ function registrarHistorico(aMensagem){
 } 
 
 function registrarMatricula(nomeCompleto, contato, idade, taxa, planoMensalidade, nivel,  condicao, restricao, objetivo){
-    validarNumeros(contato, idade, taxa, nivel);
+    
     mostrarDetalhes(condicao, restricao);
-
-    let camposObrigatorios = validarCamposObrigatorios(nomeCompleto, contato.value, idade.value, taxa.value, nivel.value, objetivo, condicao, restricao.value);
+    let numeros = validarNumeros(contato);
+    let camposObrigatorios = validarCamposObrigatorios(nomeCompleto, contato.value, idade, taxa, nivel, objetivo, condicao, restricao);
     let nome = validarNomeCompleto(nomeCompleto)
-    let niveis = calcularNivel(nivel.value);
-    let total = calcularValorTotal(planoMensalidade, taxa.value);
+    let niveis = calcularNivel(nivel);
+    let total = calcularValorTotal(planoMensalidade, taxa);
     let data = calcularData();
-    let numeroMatricula = gerarNumeroMatricula()
+    let numeroMatricula = gerarNumeroMatricula();
 
     if (camposObrigatorios) {
-        if(nome){
-            if(niveis){
-                if(total){
-                    if (total) {
+        if (nome) {
+            if (niveis) {
+                if (total) {
+                    if (numeros) {
                         return `[${numeroMatricula}] A matrícula do(a) aluno(a) ${nomeCompleto} de nível ${niveis} está feita! O valor total da matrícula foi de R$ ${total} [${data}]`;
                     } else {
-                        return "Problemas com o total.";
+                        return "Problemas com contato.";
                     }
-                } else{
-                    return "Problemas com taxa."
+                } else {
+                    return "Problemas com taxa.";
                 }
-            }else{
-                return "Problemas com nível."
+            } else {
+                return "Problemas com nível.";
             }
-        }else{
-            return "Problemas com nome completo."
+        } else {
+            return "Problemas com nome completo.";
         }    
     } else {
         return "Problemas na validação de campos obrigatórios! Por favor, preencha todos os campos obrigatórios.";
@@ -120,11 +108,11 @@ function registrarMatricula(nomeCompleto, contato, idade, taxa, planoMensalidade
 function matricular() {
     let nomeCompleto = document.getElementById("nome").value;
     let contato = document.getElementById("contato");
-    let idade = document.getElementById("idade");
-    let taxa = document.getElementById("taxa");
-    let nivel = document.getElementById("nivel");
+    let idade = parseInt(document.getElementById("idade").value);
+    let taxa = parseFloat(document.getElementById("taxa").value);
+    let nivel = parseInt(document.getElementById("nivel").value);
     let planoMensalidade = parseFloat(document.getElementById("planos").value);
-    let restricao = document.getElementById("restricao");
+    let restricao = document.getElementById("restricao").value;
     let condicao = document.getElementById("condicao").value;
     let objetivo = document.getElementById("objetivo").value;
     let mensagem = registrarMatricula(nomeCompleto, contato, idade, taxa, planoMensalidade, nivel,  condicao, restricao, objetivo);
