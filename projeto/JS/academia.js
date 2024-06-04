@@ -38,7 +38,6 @@ function validarNumeros(oContato) {
             oContato.value = `(${oContato.value.slice(0, 2)}) ${oContato.value.slice(2, 7)}-${oContato.value.slice(7)}`;
         } 
     });
-    
     return oContato.value.length > 11 ? oContato.value : false;    
 }
 
