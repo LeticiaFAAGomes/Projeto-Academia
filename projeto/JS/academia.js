@@ -61,7 +61,7 @@ function gerarNumeroMatricula() {
     return Math.floor(Math.random() * 10000);
 }
 
-function registrarHistorico(aMensagem, oBotao) {
+function registrarHistorico(aMensagem) {
     // RN.09 - Histórico de Alterações:
             const ulHistoricoAlteracao = document.getElementById("historicoAlteracao");
             const liHistorico = document.createElement("li");
@@ -113,10 +113,9 @@ function matricular() {
     const restricao = document.getElementById("restricao");
     const condicao = document.getElementById("condicao").value;
     const objetivo = document.getElementById("objetivo").value;
-    const botao = document.getElementById("btn");
     let mensagem = registrarMatricula(nomeCompleto, contato, idade, taxa, planoMensalidade, nivel,  condicao, restricao, objetivo);
 
-    registrarHistorico(mensagem, botao)
+    registrarHistorico(mensagem)
 }
 
 validarNumeros()
